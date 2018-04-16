@@ -5,12 +5,11 @@
 	<meta charset="utf-8">
 	<title>Hasbahçe</title>
 	<link href="style.css" rel="stylesheet">
-	<base href="C:\Users\Administrator\Desktop\my_site\">
 </head>
 
 <body>
 	
-		<div class="container">
+		<div class="header">
 			<h2 class="section-title">Популярное/новое</h2>
 			<button class="btn to-catalog" type="button" id="toShop">В каталог</button>
 			<button class="btn to-cart" type="button" id="cart">Корзина</button>
@@ -19,54 +18,100 @@
 		</div>
 			
 			<script>
-				var items = [
-					 {
+				var data = {"item":[
+					  {
 						"id": 1,
 						"name": "Розовый цветок",
 						"cost": 250,
-						"title": "Синий бант и средний горшок"
+						"description": "Синий бант и средний горшок"
 					},
 					 {
 						"id": 2,
 						"name": "Желтый цветок",
 						"cost": 230,
-						"title": "Желтый бант и малый горшок"
+						"description": "Желтый бант и малый горшок"
 					},
 					 {
 						"id": 3,
 						"name": "Красный цветок",
 						"cost": 270,
-						"title": "Красный бант и средний горшок"
+						"description": "Красный бант и средний горшок"
 					},
 					 {
 						"id": 4,
 						"name": "Белый цветок",
 						"cost": 260,
-						"title": "Белый бант и средний горшок"
+						"description": "Белый бант и средний горшок"
 					}
-				];
+				]};
 //проверяю наличие товара в консоле
-				console.log(items);
+				console.log(data);
 
 //создаю блоки div
-				var div = document.createElement('div');
-					div.className = "popular-items catalog-item item_box";
-					div.setAttribute('id', 'info');
-					
-					document.body.insertBefore(div, document.body.firstChild);
-					
-				for (var i = 0; i < items.length - 1; i++) {
-					var div2 = div.cloneNode(true);
-					div.parentNode.insertBefore(div2, div.nextSibling);
+	document.addEventListener("DOMContentLoaded", loadDiv)
+
+		function loadDiv() {
+//создаю первый div - контейнер товара
+			var div0 = document.createElement('div');
+				div0.className = "popular-items";
+//создаю вложенный в контейнер div - блок описания товара
+			var div1 = document.createElement("div");
+				div1.className = "catalog-item item_box";
+				div0.appendChild(div1);
+//создаю дочерние элементы для описания товара
+			var articleItem = document.createElement("p");
+				articleItem.setAttribute("id", "articleItem");
+				articleItem.className = "item_article";
+					var article = '';
+					for (var i in data.item) {
+						article += data.item[i].id;
 					}
+				articleItem.innerHTML = article; //сюда вставить id объекта
+				div1.appendChild(articleItem);
+			var nameItem = document.createElement("h3");
+				nameItem.setAttribute("id", "nameItem");
+				nameItem.className = "item_title";
+					var name = '';
+					for (var i in data.item) {
+						name += data.item[i].name; 
+					}
+				nameItem.innerHTML = name; //сюда вставить name объекта
+				div1.appendChild(nameItem);
+			var costItem = document.createElement("p");
+				costItem.setAttribute("id", "costItem");
+				costItem.className = "item_cost";
+					var cost = '';
+					for (i = 0; i < data.length; i++) { // не показывает необходимый элемент
+					cost += data.item[i].cost;
+					}
+				costItem.innerHTML = cost; //сюда вставить cost объекта
+				div1.appendChild(costItem);
+			var descriptionItem = document.createElement("p");
+				descriptionItem.setAttribute("id", "descriptionItem");
+				descriptionItem.className = "item_desription";
+					var description = '';
+					for (var i in data.item) { // показывает сразу все элементы 4-х
+					description += data.item[i].description;
+					}
+				descriptionItem.innerHTML = description; //сюда вставить description объекта
+				div1.appendChild(descriptionItem);
+// вывожу первый блок				
+	document.body.insertBefore(div0, document.body.firstChild); 
+//копирую первый блок с товаром по количеству объектов в массиве
+			for (var i = 0; i < data.item.length - 1; i++) {
+				var cloneDiv = div0.cloneNode(true);
+				div0.parentNode.insertBefore(cloneDiv, div0.nextSibling);
+			}
+		}
+
+			
+				
+					
+				
+					
+
 //вывожу товар в блок div	
-				var addInfo = document.getElementById(info);
-				var i;
-				var x  = "";
-					for (i in items) {
-							x += items[i] + "<br>";
-						}
-				addInfo.innerHTML = x;
+	
 /*				const updateListener = () => {
 
 				}

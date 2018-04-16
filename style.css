@@ -9,7 +9,7 @@ body {
     background-color: white;
 }
 
-.container {
+.header {
     margin-left: 40px;
     margin-right: 40px;
     position: absolute;
@@ -88,10 +88,6 @@ body {
 
 }
 
-.catalog-item:last-child {
-    margin-right: 0;
-}
-
 .catalog-item img {
     position: absolute;
     top: 0;
@@ -112,19 +108,27 @@ body {
     z-index: 1000;
  }
 
-.catalog-item h3 {
+.item_article {
+    position: relative;
+}
+
+.item_title {
+    position: relative;
     float: left;
     max-width: 205px;
     margin: 0;
-    margin-bottom: 20px;
     font-size: 16px;
     color: #000000;
 }
 
-.catalog-item-price {
+.item_desription {
+    position: relative;
+    float: left;
+}
+
+.item_cost {
     float: right;
     max-width: 70px;
-    margin-bottom: 20px;
 }
 
 .catalog-item .btn {
